@@ -21,7 +21,7 @@ function Survey() {
         'Other',
       ],
       type: 'checkbox',
-      maxSelections: 3, // Limit for this question
+      maxSelections: 3, 
     },
     {
       id: 'values',
@@ -37,7 +37,7 @@ function Survey() {
         'Resilience',
       ],
       type: 'checkbox',
-      maxSelections: 3, // Limit for this question
+      maxSelections: 3, 
     },
     {
       id: 'shortTermGoal',
@@ -51,7 +51,7 @@ function Survey() {
     },
     {
       id: 'motivation',
-      question: 'How would you describe your productivity motivation?',
+      question: 'What motivates you to stay productive?',
       options: [
         'I thrive on structure and deadlines.',
         'I like flexibility but need direction.',
@@ -89,14 +89,35 @@ function Survey() {
     if (currentStep < questions.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      alert('Survey completed! Thank you for your responses.');
-      console.log('Survey Responses:', responses);
+      handleSubmit();
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/survey', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(responses),
+      });
+
+      if (response.ok) {
+        alert('Survey submitted successfully!');
+        console.log('Survey Responses:', responses);
+      } else {
+        alert('Failed to submit the survey. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting survey:', error);
+      alert('An error occurred while submitting the survey.');
     }
   };
 

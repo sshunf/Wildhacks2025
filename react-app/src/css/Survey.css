@@ -42,8 +42,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 150px; /* Fixed width */
-    height: 50px; /* Fixed height */
+    width: 150px; /* Fixed width for consistency */
+    height: 50px; /* Fixed height for consistency */
+    padding: 10px; /* Add padding for spacing */
     border: 2px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -51,6 +52,9 @@
     transition: all 0.3s ease;
     text-align: center;
     font-size: 1rem;
+    overflow-wrap: break-word; /* Handle long text */
+    word-wrap: break-word; /* Fallback for older browsers */
+    text-overflow: ellipsis; /* Gracefully handle overflow */
   }
   
   .option-button:hover {
