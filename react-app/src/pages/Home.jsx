@@ -7,7 +7,7 @@ function Home() {
   return (
     <div>
       <h1>Welcome to the Productivity App!</h1>
-      <button onClick={() => navigate('/survey')}>Go to Survey</button>
+      <button onClick={() => navigate('/auth')}>Sign Up</button>
     </div>
   );
 }
