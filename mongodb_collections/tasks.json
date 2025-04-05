@@ -1,0 +1,23 @@
+[
+    {
+      "_id": { "$oid": "642c1f2e2f2e2f2e2f2e2f2a" },
+      "user_id": { "$oid": "642c1f1e1f1e1f1e1f1e1f1a" },
+      "task_name": "Write a business plan",
+      "difficulty": "medium",
+      "completed": false
+    },
+    {
+      "_id": { "$oid": "642c1f2e2f2e2f2e2f2e2f2b" },
+      "user_id": { "$oid": "642c1f1e1f1e1f1e1f1e1f1b" },
+      "task_name": "Outline book chapters",
+      "difficulty": "easy",
+      "completed": true
+    },
+    {
+      "_id": { "$oid": "642c1f2e2f2e2f2e2f2e2f2c" },
+      "user_id": { "$oid": "642c1f1e1f1e1f1e1f1e1f1a" },
+      "task_name": "Run 5 miles",
+      "difficulty": "hard",
+      "completed": false
+    }
+  ]
