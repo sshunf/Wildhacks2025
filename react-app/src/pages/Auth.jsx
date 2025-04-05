@@ -36,7 +36,7 @@ const Auth = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log('User signed in:', data);
-                alert(`Welcome, ${data.user.name}!`);
+                alert(`Welcome, ${data.user.username}!`);
                 navigate('/survey'); // Redirect to /survey after successful login
             })
             .catch((error) => {
