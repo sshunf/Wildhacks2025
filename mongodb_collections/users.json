@@ -9,7 +9,8 @@
       "motivation": "I want to improve my life and achieve my goals.",
       "short_term_goals": ["learn a new language", "read more books"],
       "long_term_goals": ["retire early", "travel the world"],
-      "rating": 45
+      "rating": 45,
+      "finished_survey": false
     },
     {
       "_id": { "$oid": "642c1f1e1f1e1f1e1f1e1f1b" },
@@ -21,6 +22,7 @@
       "motivation": "I want to be a better version of myself.",
       "short_term_goals": ["start a business", "run a marathon"],
       "long_term_goals": ["retire early", "travel the world"],
-      "rating": 38
+      "rating": 38,
+      "finished_survey": false
     }
   ]
