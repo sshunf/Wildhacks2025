@@ -89,6 +89,7 @@ function Survey() {
     if (currentStep < questions.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
+      console.log(responses);
       handleSubmit();
     }
   };
