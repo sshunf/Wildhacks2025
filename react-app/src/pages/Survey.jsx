@@ -21,6 +21,7 @@ function Survey() {
         'Other',
       ],
       type: 'checkbox',
+      maxSelections: 3, // Limit for this question
     },
     {
       id: 'values',
@@ -36,6 +37,7 @@ function Survey() {
         'Resilience',
       ],
       type: 'checkbox',
+      maxSelections: 3, // Limit for this question
     },
     {
       id: 'shortTermGoal',
@@ -64,10 +66,16 @@ function Survey() {
     const { name, value, type, checked } = e.target;
 
     if (type === 'checkbox') {
+      const maxSelections = questions.find((q) => q.id === name)?.maxSelections || Infinity;
       setResponses((prev) => {
         const prevValues = prev[name] || [];
         if (checked) {
-          return { ...prev, [name]: [...prevValues, value] };
+          if (prevValues.length < maxSelections) {
+            return { ...prev, [name]: [...prevValues, value] };
+          } else {
+            alert(`You can only select up to ${maxSelections} options.`);
+            return prev;
+          }
         } else {
           return { ...prev, [name]: prevValues.filter((v) => v !== value) };
         }
@@ -95,49 +103,65 @@ function Survey() {
   const currentQuestion = questions[currentStep];
 
   return (
-    <div className="question-container">
-    <p className="question-text">{currentQuestion.question}</p>
-    {currentQuestion.type === 'checkbox' && (
-      <div className="options-grid">
-        {currentQuestion.options.map((option) => (
-          <label key={option} className="option-label">
-            <input
-              type="checkbox"
-              name={currentQuestion.id}
-              value={option}
-              onChange={handleChange}
-              className="option-input"
-            />
-            <span className="option-button">{option}</span>
-          </label>
-        ))}
+    <div className="survey-container">
+      <h1 className="survey-title">Survey</h1>
+      <div className="question-container">
+        <p className="question-text">{currentQuestion.question}</p>
+        {currentQuestion.type === 'checkbox' && (
+          <div className="options-grid">
+            {currentQuestion.options.map((option) => (
+              <label key={option} className="option-label">
+                <input
+                  type="checkbox"
+                  name={currentQuestion.id}
+                  value={option}
+                  onChange={handleChange}
+                  className="option-input"
+                  checked={responses[currentQuestion.id]?.includes(option) || false}
+                  disabled={
+                    responses[currentQuestion.id]?.length >= currentQuestion.maxSelections &&
+                    !responses[currentQuestion.id]?.includes(option)
+                  }
+                />
+                <span className="option-button">{option}</span>
+              </label>
+            ))}
+          </div>
+        )}
+        {currentQuestion.type === 'radio' && (
+          <div className="options-grid">
+            {currentQuestion.options.map((option) => (
+              <label key={option} className="option-label">
+                <input
+                  type="radio"
+                  name={currentQuestion.id}
+                  value={option}
+                  onChange={handleChange}
+                  className="option-input"
+                />
+                <span className="option-button">{option}</span>
+              </label>
+            ))}
+          </div>
+        )}
+        {currentQuestion.type === 'text' && (
+          <input
+            type="text"
+            name={currentQuestion.id}
+            onChange={handleChange}
+            className="text-input"
+          />
+        )}
       </div>
-    )}
-    {currentQuestion.type === 'radio' && (
-      <div className="options-grid">
-        {currentQuestion.options.map((option) => (
-          <label key={option} className="option-label">
-            <input
-              type="radio"
-              name={currentQuestion.id}
-              value={option}
-              onChange={handleChange}
-              className="option-input"
-            />
-            <span className="option-button">{option}</span>
-          </label>
-        ))}
+      <div className="navigation-buttons">
+        <button className="nav-button" onClick={handlePrevious} disabled={currentStep === 0}>
+          Previous
+        </button>
+        <button className="nav-button" onClick={handleNext}>
+          {currentStep < questions.length - 1 ? 'Next' : 'Submit'}
+        </button>
       </div>
-    )}
-    {currentQuestion.type === 'text' && (
-      <input
-        type="text"
-        name={currentQuestion.id}
-        onChange={handleChange}
-        className="text-input"
-      />
-    )}
-  </div>
+    </div>
   );
 }
 
