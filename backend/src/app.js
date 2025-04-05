@@ -1,14 +1,18 @@
+require('dotenv').config();
 const express = require('express');
+const connectDB = require('./config/db');
 const app = express();
+
+connectDB();
 
 // Middleware
 app.use(express.json());
 
 // Import routes
-const routes = require('./routes'); // Adjust the path if necessary
+const routes = require('./routes');
 
 // Use routes
-app.use('/api', routes); // Prefix all routes with '/api'
+app.use('/api', routes);
 
 // Basic route
 app.get('/', (req, res) => {
