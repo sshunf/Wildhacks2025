@@ -1,18 +1,18 @@
 const express = require('express');
 const app = express();
-const routes = require('./routes/index');
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.use('/api', routes);
+// Import routes
+const routes = require('./routes'); // Adjust the path if necessary
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+// Use routes
+app.use('/api', routes); // Prefix all routes with '/api'
+
+// Basic route
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
 });
 
 // Start the server
