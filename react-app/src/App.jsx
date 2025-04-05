@@ -1,11 +1,22 @@
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Survey from './pages/Survey';
+import './App.css';
+
+function NotFound() {
+  return <h1>404 - Page Not Found</h1>;
+}
 
 function App() {
   return (
-    <>
-      <h1>Hello World!</h1>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/survey" element={<Survey />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
