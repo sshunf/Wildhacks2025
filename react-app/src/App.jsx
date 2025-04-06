@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Survey from './pages/Survey';
 import Auth from './pages/Auth';
+import Task from './pages/Task';
 import './App.css';
 
 function NotFound() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/survey" element={<Survey />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/tasks" element={<Task />} />
       </Routes>
     </Router>
   );

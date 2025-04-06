@@ -36,8 +36,10 @@ const Auth = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log('User signed in:', data);
-                alert(`Welcome, ${data.user.username}!`);
 
+                localStorage.setItem('userId', data.user._id); // Store the user ID
+
+                alert(`Welcome, ${data.user.username}!`);
                 navigate('/survey'); // Redirect to /survey after successful login
             })
             .catch((error) => {

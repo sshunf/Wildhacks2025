@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     core_values: [String],
-    life_prioties: [String],
+    life_priorities: [String],
     motivation: String,
     short_term_goals: [String],
     long_term_goals: [String],

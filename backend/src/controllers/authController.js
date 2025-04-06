@@ -33,7 +33,7 @@ const authController = {
                     username: name,
                     email,
                     core_values: [], // Default empty array
-                    life_prioties: [], // Default empty array
+                    life_priorities: [], // Default empty array
                     motivation: '',
                     short_term_goals: [],
                     long_term_goals: [],

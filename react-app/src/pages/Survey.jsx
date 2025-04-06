@@ -102,18 +102,33 @@ function Survey() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/survey', {
-        method: 'POST',
+      const userId = localStorage.getItem('userId'); // Retrieve user ID from localStorage
+      if (!userId) {
+        alert('User ID not found. Please log in again.');
+        return;
+      }
+  
+      const updatedUserData = {
+        core_values: responses.values || [],
+        life_prioties: responses.priorities || [],
+        short_term_goals: responses.shortTermGoal || '',
+        long_term_goals: responses.longTermGoal || '',
+        motivation: responses.motivation || '',
+      };
+  
+      const response = await fetch(`http://localhost:5000/api/users/${userId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(responses),
+        body: JSON.stringify(updatedUserData),
       });
-
+  
       if (response.ok) {
         alert('Survey submitted successfully!');
-        console.log('Survey Responses:', responses);
       } else {
+        const errorData = await response.json();
+        console.error('Error response from server:', errorData);
         alert('Failed to submit the survey. Please try again.');
       }
     } catch (error) {
