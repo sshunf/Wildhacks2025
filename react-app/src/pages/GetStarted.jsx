@@ -37,7 +37,13 @@ function GetStarted() {
             let response = await data.json();
             console.log(response);
             console.log(response.geminiResponse); // make task components from these that show up on dashboard
-            const taskList = response.geminiResponse.split(',').map(task => task.trim()); // Split the response into an array of tasks
+            const cleanResponse = response.geminiResponse.replace(/"/g, '').trim().slice(1, -1);
+            const taskList = cleanResponse
+                .split(',')
+                .map(task => task.trim())
+                .filter(task => task.length > 0);
+
+            console.log("TASK LIST: ", taskList);
             //Upload tasks to the database
             console.log("TASK LIST: ", taskList);
             await fetch('http://localhost:5000/task/create-tasks', {
