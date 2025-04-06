@@ -66,6 +66,56 @@ function Dashboard() {
     }
   }; 
 
+  const getRecommendedTasks = async () => {
+
+    const userData = location.state?.userData || JSON.parse(localStorage.getItem('userData'));
+    if (!userData?._id) {
+      throw new Error('No user ID found');
+    }
+    const data = await fetch('http://localhost:5000/task/recommended-tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }, // Correct header
+      body: JSON.stringify({
+        user: userData, 
+        numTasks: 3,
+      })
+    });
+
+    let response = await data.json();
+    console.log(response);
+    console.log(response.geminiResponse); // make task components from these that show up on dashboard
+    const cleanResponse = response.geminiResponse.replace(/"/g, '').trim().slice(1, -1);
+    const taskList = cleanResponse
+        .split(',')
+        .map(task => task.trim())
+        .filter(task => task.length > 0);
+
+    //Upload tasks to the database
+    console.log("TASK LIST: ", taskList);
+    await fetch('http://localhost:5000/task/create-tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: userData._id, 
+          task_list: taskList,
+        }), 
+    });
+
+    response = await fetch(`http://localhost:5000/task/${userData._id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch tasks');
+    }
+
+    const tasks = await response.json();
+    console.log('Fetched tasks:', tasks.tasks);
+    setTasks(tasks.tasks || []);
+
+  }
+
   const handleDelete = async (taskId) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
   
@@ -140,7 +190,7 @@ function Dashboard() {
       </div>
       <div>
         <button className="button" onClick={() => setShowModal(true)}>Add Task</button>
-        <button className="button">Get Recommended Tasks</button>
+        <button className="button" onClick={getRecommendedTasks}>Get Recommended Tasks</button>
       </div>
 
       {/* Modal for adding a task */}
