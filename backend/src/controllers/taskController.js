@@ -47,7 +47,7 @@ const getTasks = async (req, res) => {
         const searchId = new mongoose.Types.ObjectId(user_id); 
         const tasks = await Task.find({ user_id: searchId });
         console.log(tasks);
-        res.status(200).json(tasks);
+        res.status(200).json({tasks:tasks});
     } catch (error) {
         console.error('Error fetching tasks:', error);
         res.status(500).json({ error: 'Failed to fetch tasks' });

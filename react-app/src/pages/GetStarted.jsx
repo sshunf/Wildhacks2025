@@ -15,7 +15,17 @@ function GetStarted() {
             console.log("USER DATA: ");
             console.log(userData);
 
-            const data = await fetch('http://localhost:5000/task/process-content', {
+            
+            const userTasks = await fetch(`http://localhost:5000/task/${userData._id}`, {
+              method: 'GET',
+              headers: { 'Content-Type': 'application/json' }
+            });
+
+            console.log("userTasks: ", userTasks);
+            console.log("userTasks: ", userTasks.body);
+
+            if (userTasks.length === 0){
+              const data = await fetch('http://localhost:5000/task/process-content', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }, // Correct header
                 body: JSON.stringify({
@@ -38,6 +48,8 @@ function GetStarted() {
                   task_list: taskList,
                 }), 
             });
+
+            }
             navigate('/dashboard', { state: { userData } }); // Pass userData to the Dashboard page
         }} style={{ padding: '10px 20px', fontSize: '16px' }}>
         Go to Dashboard
