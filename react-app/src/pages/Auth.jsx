@@ -38,7 +38,7 @@ const Auth = () => {
                 console.log('User signed in:', data);
 
                 console.log(data.user);
-                localStorage.setItem('userData', data.user);
+                localStorage.setItem('userData', JSON.stringify(data.user));
 
                 console.log(data.user.finished_survey);
                 if (data.user.finished_survey) {

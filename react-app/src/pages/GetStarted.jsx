@@ -9,15 +9,18 @@ function GetStarted() {
       <h1>Welcome to Your Productivity Journey!</h1>
       <p>Thank you for completing the survey. Let's get started on achieving your goals!</p>
       <button onClick={ async () => {
-            const parsedUserData = JSON.parse(localStorage.getItem('userData'));
-            const data = await fetch('https://localhost:5000/task/process-content', {
+            const userData = localStorage.getItem('userData');
+
+            console.log(userData);
+
+            const data = await fetch('http://localhost:5000/task/process-content', {
                 method: 'POST',
-                headers: { 'Content-type' : 'application/json' },
+                headers: { 'Content-Type': 'application/json' }, // Correct header
                 body: JSON.stringify({
-                    user: localStorage.getItem('userData'),
-                    numTasks: 3, 
-                  })
-            })
+                  user: userData, 
+                  numTasks: 3,
+                }), 
+            });
 
             console.log(data);
             navigate('/dashboard');

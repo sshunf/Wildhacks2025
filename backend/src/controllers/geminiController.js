@@ -5,10 +5,10 @@ const client = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 const processContent = async (req, res) => {
     try {
-        console.log("generating initial user tasks");
+        console.log("generating initial user tasks\n");
         const {user, numTasks} = req.body;
 
-        if (!userProfile || !numTasks) {
+        if (!user || !numTasks) {
             return res.status(400).json({ error: 'userProfile and numTasks are required' });
         }
 
@@ -24,12 +24,14 @@ const processContent = async (req, res) => {
         const prompt = 'Based on my user profile: ' + JSON.stringify(userProfile) + ' and the response format: ' + responseFormat + ', generate a list of ' + numTasks + 'tasks that I can do to achieve my goals.'
 
         //Call Gemini API to generate content
+        console.log("calling gemini api\n");
         const response = await client.models.generateContent({
             model: "gemini-2.0-flash",
             contents: prompt,
           });
 
         // Send the response back to the client
+        console.log(response.text);
         return res.json({ geminiResponse: response.text });
     } catch (error) {
         console.error('Error calling Gemini API:', error);
