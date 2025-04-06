@@ -50,3 +50,11 @@ html, body, #root {
   .home-button:hover {
     background-color: #715d94;
   }
+
+  .home-image {
+    max-width: 60%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); /* Optional: Add a shadow */
+  }
