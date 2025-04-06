@@ -104,7 +104,8 @@ function Survey() {
 
   const handleSubmit = async () => {
     try {
-      const userId = localStorage.getItem('userId'); // Retrieve user ID from localStorage
+      const user = localStorage.getItem('userData'); // Retrieve user ID from localStorage
+      const userId = user ? JSON.parse(user)._id : null; // Parse the user data to get the ID
       if (!userId) {
         alert('User ID not found. Please log in again.');
         return;
@@ -131,6 +132,9 @@ function Survey() {
       if (response.ok) {
         alert('Survey submitted successfully!');
         localStorage.setItem('finished_survey', 'true'); // Update finished_survey in localStorage
+        const newUserData = await response.json();
+        console.log('Updated user data:', newUserData.user);
+        localStorage.setItem('userData', JSON.stringify(newUserData.user)); // Update user data in localStorage
         navigate('/getstarted'); // Navigate to the GetStarted page
       } else {
         const errorData = await response.json();

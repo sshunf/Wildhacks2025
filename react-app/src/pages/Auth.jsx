@@ -46,6 +46,8 @@ const Auth = () => {
                     alert(`Welcome back, ${data.user.username}!`);
                     navigate('/getstarted'); // Redirect to GetStarted page if survey is completed
                 } else {
+                    localStorage.setItem('userData', JSON.stringify(data.user));
+                    localStorage.setItem('finished_survey', 'false'); // Set finished_survey to false in localStorage
                     alert(`Welcome, ${data.user.username}!`);
                     navigate('/survey'); // Redirect to Survey page if survey is not completed
                 }
