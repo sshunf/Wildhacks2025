@@ -11,7 +11,7 @@
   }
   
   .task.completed {
-    background-color: #d4edda !important;
+    background-color: #d4edda;
     text-decoration: line-through;
     color: #6c757d;
   }
@@ -27,12 +27,12 @@
   .task button.complete-button {
     margin-right: 10px;
     background-color: #28a745;
-    color: #fff;
+    color: white;
   }
   
   .task button.delete-button {
     background-color: #dc3545;
-    color: #fff;
+    color: white;
   }
   
   .task button:hover {

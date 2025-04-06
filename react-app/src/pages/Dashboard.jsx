@@ -7,22 +7,19 @@ function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Initialize tasks from location.state or default to an empty array
   const [tasks, setTasks] = useState([]);
 
   const fetchTasks = React.useCallback(async () => {
     try {
-      // Get user data from localStorage as fallback
       const userData = location.state?.userData || JSON.parse(localStorage.getItem('userData'));
-      
+
       if (!userData?._id) {
         throw new Error('No user ID found');
       }
 
-      console.log(userData);
       const response = await fetch(`http://localhost:5000/task/${userData._id}`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       });
 
       if (!response.ok) {
@@ -30,33 +27,30 @@ function Dashboard() {
       }
 
       const data = await response.json();
-      console.log('Fetched tasks:', data);
-      setTasks(data || []);
+      console.log('Fetched tasks:', data.tasks);
+      setTasks(data.tasks || []);
     } catch (err) {
       console.error('Error fetching tasks:', err);
-      // Redirect to auth if no user data is found
       if (err.message === 'No user ID found') {
         navigate('/auth');
       }
     }
   }, [navigate]);
-  
+
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);
 
-  // Mark a task as completed
-  const handleComplete = (taskIndex) => {
+  const handleComplete = (taskId) => {
     setTasks((prevTasks) =>
-      prevTasks.map((task, index) =>
-        index === taskIndex ? `✅ ${task}` : task
+      prevTasks.map((task) =>
+        task._id === taskId ? { ...task, completed: !task.completed } : task
       )
     );
   };
 
-  // Delete a task
-  const handleDelete = (taskIndex) => {
-    setTasks((prevTasks) => prevTasks.filter((_, index) => index !== taskIndex));
+  const handleDelete = (taskId) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
   };
 
   return (
@@ -64,12 +58,14 @@ function Dashboard() {
       <h1 className="dashboard-title">Dashboard</h1>
       <p className="dashboard-subtitle">Here are your tasks:</p>
       <div className="tasks-container">
-        {tasks.map((task, index) => (
+        {tasks.map((task) => (
           <Task
-            key={index}
-            taskName={task}
-            onComplete={() => handleComplete(index)}
-            onDelete={() => handleDelete(index)}
+            key={task._id}
+            taskId={task._id}
+            taskName={task.task_name}
+            completed={task.completed}
+            onComplete={() => handleComplete(task._id)}
+            onDelete={() => handleDelete(task._id)}
           />
         ))}
       </div>
