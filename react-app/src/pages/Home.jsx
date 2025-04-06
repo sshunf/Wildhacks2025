@@ -14,6 +14,7 @@ function Home() {
       <button className="home-button" onClick={() => navigate('/auth')}>
         Get Started
       </button>
+      <img src="/frontpage.png" alt="HeroHabits Front Page" className="home-image" />
     </div>
   );
 }
