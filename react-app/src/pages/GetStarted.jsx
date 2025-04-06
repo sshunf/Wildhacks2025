@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function GetStarted() {
   const navigate = useNavigate();
+  const [tasks, setTasks] = useState([]);
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
@@ -25,8 +26,8 @@ function GetStarted() {
 
             let response = await data.json();
             console.log(response);
-            console.log(response.geminiResponse);
-            
+            console.log(response.geminiResponse); // make task components from these that show up on dashboard
+            setTasks(response.geminiResponse);
             navigate('/dashboard');
         }} style={{ padding: '10px 20px', fontSize: '16px' }}>
         Go to Dashboard
