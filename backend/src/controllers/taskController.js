@@ -45,7 +45,7 @@ const getTasks = async (req, res) => {
     try {
         const  user_id  = req.params.userId;
         const searchId = new mongoose.Types.ObjectId(user_id); 
-        const tasks = await Task.find({ user_id: searchId });
+        const tasks = await Task.find({ user_id: searchId, completed: false });
         console.log(tasks);
         res.status(200).json({tasks:tasks});
     } catch (error) {
@@ -71,6 +71,25 @@ const deleteTask = async (req, res) => {
     }
 }
 
-const completeTask = async ()
+const completeTask = async (req, res) => {
+    try {
+        const { taskId } = req.params;
 
-module.exports = { createTask, createTasks, getTasks, deleteTask };
+        const updatedTask = await Task.findByIdAndUpdate(
+            taskId,
+            { completed: true },
+            { new: true }
+        );
+
+        if (!updatedTask) {
+            return res.status(404).json({ error: 'Task not found' });
+        }
+
+        res.status(200).json({ message: 'Task marked as completed', task: updatedTask });
+    } catch (error) {
+        console.error('Error completing task:', error);
+        res.status(500).json({ error: 'Failed to complete task' });
+    }
+};
+
+module.exports = { createTask, createTasks, getTasks, deleteTask, completeTask };

@@ -43,13 +43,28 @@ function Dashboard() {
     fetchTasks();
   }, [fetchTasks]);
 
-  const handleComplete = (taskId) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task._id === taskId ? { ...task, completed: !task.completed } : task
-      )
-    );
-  };
+  const handleComplete = async (taskId) => {
+    // Optimistically update the UI by removing the task locally
+    setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
+  
+    try {
+      // Send a PUT request to mark the task as completed
+      const response = await fetch(`http://localhost:5000/task/${taskId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to complete task');
+      }
+  
+      console.log('Task marked as completed successfully');
+    } catch (err) {
+      console.error('Error completing task:', err);
+  
+      fetchTasks(); 
+    }
+  }; 
 
   const handleDelete = async (taskId) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
