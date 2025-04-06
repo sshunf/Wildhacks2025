@@ -1,0 +1,27 @@
+/* Container for the entire dashboard */
+.dashboard-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Title styling */
+  .dashboard-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Subtitle styling */
+  .dashboard-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  /* Container for the tasks */
+  .tasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between tasks */
+  }
