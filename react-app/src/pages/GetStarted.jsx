@@ -56,9 +56,9 @@ function GetStarted() {
             });
 
             }
-            navigate('/dashboard', { state: { userData } }); // Pass userData to the Dashboard page
+            navigate('/hero', { state: { userData } }); 
         }} style={{ padding: '10px 20px', fontSize: '16px' }}>
-        Go to Dashboard
+        Choose Your Hero
       </button>
     </div>
   );
