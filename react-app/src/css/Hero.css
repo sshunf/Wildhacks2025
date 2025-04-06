@@ -17,22 +17,36 @@
 .hero-images {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Space between images */
+    gap: 30px; /* Space between images */
 }
 
 /* Individual hero image styling */
 .hero-image {
-    max-width: 200px; /* Set a maximum width for the images */
-    max-height: 200px; /* Set a maximum height for the images */
+    max-width: 320px; /* Set a maximum width for the images */
+    max-height: 320px; /* Set a maximum height for the images */
     object-fit: cover; /* Ensure the image fits without distortion */
     border-radius: 10px; /* Add rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow */
     cursor: pointer; /* Change cursor to pointer */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    opacity: 0; /* Start fully transparent */
+    animation: fadeIn 1.5s ease-in forwards; /* Apply fade-in animation */
 }
 
 /* Hover effect for hero images */
 .hero-image:hover {
-    transform: scale(1.1); /* Slightly enlarge the image */
+    transform: scale(1.02); /* Slightly enlarge the image */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Fully transparent */
+        transform: translateY(20px); /* Slightly move down */
+    }
+    100% {
+        opacity: 1; /* Fully visible */
+        transform: translateY(0); /* Move to original position */
+    }
 }
