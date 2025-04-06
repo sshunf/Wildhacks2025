@@ -8,7 +8,20 @@ function GetStarted() {
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Welcome to Your Productivity Journey!</h1>
       <p>Thank you for completing the survey. Let's get started on achieving your goals!</p>
-      <button onClick={() => navigate('/dashboard')} style={{ padding: '10px 20px', fontSize: '16px' }}>
+      <button onClick={ async () => {
+            const parsedUserData = JSON.parse(localStorage.getItem('userData'));
+            const data = await fetch('https://localhost:5000/task/process-content', {
+                method: 'POST',
+                headers: { 'Content-type' : 'application/json' },
+                body: JSON.stringify({
+                    user: localStorage.getItem('userData'),
+                    numTasks: 3, 
+                  })
+            })
+
+            console.log(data);
+            navigate('/dashboard');
+        }} style={{ padding: '10px 20px', fontSize: '16px' }}>
         Go to Dashboard
       </button>
     </div>

@@ -42,12 +42,10 @@ const authController = {
                 });
                 await user.save();
             }
-            const allUsers = await Users.find();
 
             res.status(200).json({
                 message: 'User signed in successfully!',
-                user: user,
-                allUsers: allUsers,
+                user: user
             });
         } catch (error) {
             console.error('Error during Google Sign-In:', error);

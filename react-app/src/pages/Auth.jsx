@@ -28,7 +28,7 @@ const Auth = () => {
         const idToken = response.credential;
 
         // Send the ID token to the backend for authentication
-        fetch('http://localhost:5000/auth/signup', {
+        fetch('http://localhost:5000/auth/signup', { // TODO: change url
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ token: idToken }),
@@ -37,7 +37,8 @@ const Auth = () => {
             .then((data) => {
                 console.log('User signed in:', data);
 
-                localStorage.setItem('userId', data.user._id); // Store the user ID
+                console.log(data.user);
+                localStorage.setItem('userData', data.user);
 
                 console.log(data.user.finished_survey);
                 if (data.user.finished_survey) {

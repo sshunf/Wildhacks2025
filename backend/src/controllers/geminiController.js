@@ -5,7 +5,7 @@ const client = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 const processContent = async (req, res) => {
     try {
-
+        console.log("generating initial user tasks");
         const {user, numTasks} = req.body;
 
         if (!userProfile || !numTasks) {

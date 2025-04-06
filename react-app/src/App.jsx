@@ -5,6 +5,7 @@ import Auth from './pages/Auth';
 import Task from './pages/Task';
 import GetStarted from './pages/GetStarted'
 import './App.css';
+import Dashboard from './pages/Dashboard';
 
 function NotFound() {
   return <h1>404 - Page Not Found</h1>;
@@ -18,8 +19,9 @@ function App() {
         <Route path="/survey" element={<Survey />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/getstarted" element={<GetStarted />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="/tasks" element={<Task />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
