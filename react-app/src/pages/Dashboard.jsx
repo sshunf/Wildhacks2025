@@ -10,15 +10,40 @@ function Dashboard() {
   // Initialize tasks from location.state or default to an empty array
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    // Check if tasks are passed via location.state
-    if (location.state?.tasks) {
-      setTasks(location.state.tasks);
-    } else {
-      console.error('No tasks found in location.state. Redirecting to GetStarted.');
-      navigate('/getstarted'); // Redirect to GetStarted if no tasks are found
+  const fetchTasks = React.useCallback(async () => {
+    try {
+      // Get user data from localStorage as fallback
+      const userData = location.state?.userData || JSON.parse(localStorage.getItem('userData'));
+      
+      if (!userData?._id) {
+        throw new Error('No user ID found');
+      }
+
+      console.log(userData);
+      const response = await fetch(`http://localhost:5000/task/${userData._id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch tasks');
+      }
+
+      const data = await response.json();
+      console.log('Fetched tasks:', data);
+      setTasks(data || []);
+    } catch (err) {
+      console.error('Error fetching tasks:', err);
+      // Redirect to auth if no user data is found
+      if (err.message === 'No user ID found') {
+        navigate('/auth');
+      }
     }
-  }, [location.state, navigate]);
+  }, [navigate]);
+  
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   // Mark a task as completed
   const handleComplete = (taskIndex) => {

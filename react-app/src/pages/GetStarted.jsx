@@ -27,8 +27,18 @@ function GetStarted() {
             let response = await data.json();
             console.log(response);
             console.log(response.geminiResponse); // make task components from these that show up on dashboard
-            setTasks(response.geminiResponse);
-            navigate('/dashboard');
+            const taskList = response.geminiResponse.split(',').map(task => task.trim()); // Split the response into an array of tasks
+            //Upload tasks to the database
+            console.log("TASK LIST: ", taskList);
+            await fetch('http://localhost:5000/task/create-tasks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  user_id: userData._id, 
+                  task_list: taskList,
+                }), 
+            });
+            navigate('/dashboard', { state: { userData } }); // Pass userData to the Dashboard page
         }} style={{ padding: '10px 20px', fontSize: '16px' }}>
         Go to Dashboard
       </button>
