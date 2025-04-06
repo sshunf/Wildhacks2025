@@ -51,8 +51,25 @@ function Dashboard() {
     );
   };
 
-  const handleDelete = (taskId) => {
+  const handleDelete = async (taskId) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
+  
+    try {
+      const response = await fetch(`http://localhost:5000/task/${taskId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to delete task');
+      }
+  
+      console.log('Task deleted successfully');
+    } catch (err) {
+      console.error('Error deleting task:', err);
+    
+      fetchTasks();
+    }
   };
 
   const handleAddTask = async () => {
