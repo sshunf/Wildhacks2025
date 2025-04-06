@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../css/Auth.css';
 
 const loadGoogleScript = () => {
     return new Promise((resolve, reject) => {
@@ -41,14 +42,14 @@ const Auth = () => {
                 localStorage.setItem('userData', JSON.stringify(data.user));
 
                 console.log(data.user.finished_survey);
-                // if (data.user.finished_survey) {
-                //     alert(`Welcome back, ${data.user.username}!`);
-                //     navigate('/getstarted'); // Redirect to GetStarted page if survey is completed
-                // } else {
-                //     alert(`Welcome, ${data.user.username}!`);
-                //     navigate('/survey'); // Redirect to Survey page if survey is not completed
-                // }
-                navigate('/survey');
+                if (data.user.finished_survey) {
+                    alert(`Welcome back, ${data.user.username}!`);
+                    navigate('/getstarted'); // Redirect to GetStarted page if survey is completed
+                } else {
+                    alert(`Welcome, ${data.user.username}!`);
+                    navigate('/survey'); // Redirect to Survey page if survey is not completed
+                }
+                // navigate('/survey');
             })
             .catch((error) => {
                 console.error('Error signing in:', error);
@@ -75,13 +76,14 @@ const Auth = () => {
             })
             .catch((error) => {
                 console.error('Error loading Google Identity Services script:', error);
-            });
+            }); 
     }, []);
 
     return (
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <h1>Sign Up / Log In with Google</h1>
-            <div id="google-signin-button"></div>
+            <h1 className="auth-title">Sign up with Google</h1>
+            <h2 className="auth-subtitle">Begin your productivity journey now by signing up and filling out a survey based on your goals and values!</h2>
+            <div id="google-signin-button" className="google-signin-button"></div>
         </div>
     );
 };
