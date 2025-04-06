@@ -57,4 +57,17 @@ html, body, #root {
     margin-top: 20px;
     border-radius: 10px; /* Optional: Add rounded corners */
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05); /* Optional: Add a shadow */
+    opacity: 0; /* Start fully transparent */
+    animation: fadeIn 1.5s ease-in forwards; /* Apply fade-in animation */
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0; /* Fully transparent */
+      transform: translateY(20px); /* Slightly move down */
+    }
+    100% {
+      opacity: 1; /* Fully visible */
+      transform: translateY(0); /* Move to original position */
+    }
   }
