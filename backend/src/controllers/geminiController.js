@@ -21,7 +21,7 @@ const processContent = async (req, res) => {
           }
         const responseFormat = "[task1, task2, task3]";
 
-        const prompt = 'Based on my user profile: ' + JSON.stringify(userProfile) + ' and the response format: ' + responseFormat + ', generate a list of ' + numTasks + 'tasks that I can do to achieve my goals.'
+        const prompt = 'Based on my user profile: ' + JSON.stringify(userProfile) + ' and the response format: ' + responseFormat + ', generate a list of ' + numTasks + 'tasks that I can do to achieve my goals. Give me these strictly in the format I asked, with no other information and no text formatting'; 
 
         //Call Gemini API to generate content
         console.log("calling gemini api\n");
