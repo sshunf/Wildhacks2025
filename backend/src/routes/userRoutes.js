@@ -12,6 +12,7 @@ router.put('/users/:id', async (req, res) => {
             short_term_goals,
             long_term_goals,
             motivation,
+            finished_survey
         } = req.body; // Extract fields from the request body
 
         // Update the user in the database
@@ -23,6 +24,7 @@ router.put('/users/:id', async (req, res) => {
                 short_term_goals: short_term_goals || '', // Default to an empty string if not provided
                 long_term_goals: long_term_goals || '', // Default to an empty string if not provided
                 motivation: motivation || '', // Default to an empty string if not provided
+                finished_survey: finished_survey || false // Default to false if not provided
             },
             { new: true } // Return the updated document
         );

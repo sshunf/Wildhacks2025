@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import '../css/Survey.css'; 
+import '../css/Survey.css';
+import { useNavigate } from 'react-router-dom';
 
 function Survey() {
   const [responses, setResponses] = useState({});
   const [currentStep, setCurrentStep] = useState(0);
+  const navigate = useNavigate();
 
   const questions = [
     {
@@ -21,7 +23,7 @@ function Survey() {
         'Other',
       ],
       type: 'checkbox',
-      maxSelections: 3, 
+      maxSelections: 3,
     },
     {
       id: 'values',
@@ -37,7 +39,7 @@ function Survey() {
         'Resilience',
       ],
       type: 'checkbox',
-      maxSelections: 3, 
+      maxSelections: 3,
     },
     {
       id: 'shortTermGoal',
@@ -108,12 +110,14 @@ function Survey() {
         return;
       }
   
+      // Include finished_survey: true in the updated user data
       const updatedUserData = {
         core_values: responses.values || [],
-        life_prioties: responses.priorities || [],
+        life_priorities: responses.priorities || [],
         short_term_goals: responses.shortTermGoal || '',
         long_term_goals: responses.longTermGoal || '',
         motivation: responses.motivation || '',
+        finished_survey: true, // Set finished_survey to true
       };
   
       const response = await fetch(`http://localhost:5000/api/users/${userId}`, {
@@ -126,6 +130,8 @@ function Survey() {
   
       if (response.ok) {
         alert('Survey submitted successfully!');
+        localStorage.setItem('finished_survey', 'true'); // Update finished_survey in localStorage
+        navigate('/getstarted'); // Navigate to the GetStarted page
       } else {
         const errorData = await response.json();
         console.error('Error response from server:', errorData);
