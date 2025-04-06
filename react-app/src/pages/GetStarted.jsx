@@ -8,7 +8,7 @@ function GetStarted() {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Welcome to Your Productivity Journey!</h1>
-      <p>Thank you for completing the survey. Let's get started on achieving your goals!</p>
+      <p>Thank you for completing the survey. Let's get started on achieving your goals! But before that, choose your Hero!</p>
       <button onClick={ async () => {
             const userData = JSON.parse(localStorage.getItem('userData'));
 
@@ -56,9 +56,9 @@ function GetStarted() {
             });
 
             }
-            navigate('/dashboard', { state: { userData } }); // Pass userData to the Dashboard page
+            navigate('/hero', { state: { userData } }); 
         }} style={{ padding: '10px 20px', fontSize: '16px' }}>
-        Go to Dashboard
+        Choose Your Hero
       </button>
     </div>
   );

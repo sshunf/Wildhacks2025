@@ -3,7 +3,8 @@ import Home from './pages/Home';
 import Survey from './pages/Survey';
 import Auth from './pages/Auth';
 import Task from './pages/Task';
-import GetStarted from './pages/GetStarted'
+import GetStarted from './pages/GetStarted';
+import Hero from './pages/Hero';
 import './App.css';
 import Dashboard from './pages/Dashboard';
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/getstarted" element={<GetStarted />} />
         <Route path="/tasks" element={<Task />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/hero" element={<Hero />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

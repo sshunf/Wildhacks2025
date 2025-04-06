@@ -39,6 +39,8 @@ const authController = {
                     long_term_goals: [],
                     rating: 0,
                     finished_survey: false,
+                    hero_id: -1,
+                    hero_chosen: false
                 });
                 await user.save();
             }
