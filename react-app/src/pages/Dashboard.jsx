@@ -223,6 +223,7 @@ function Dashboard() {
               value={newTaskName}
               onChange={(e) => setNewTaskName(e.target.value)}
               placeholder="Enter task"
+              className="input"
             />
             <div className="modal-buttons">
               <button className="button" onClick={handleAddTask}>Add Task</button>

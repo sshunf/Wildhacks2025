@@ -66,3 +66,81 @@
     text-align: center;
     color: #333;
   }
+
+  /* Modal overlay */
+ .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears above other elements */
+  }
+  
+  /* Modal content */
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+  }
+  
+  /* Modal buttons */
+  .modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal-buttons .button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-buttons .button:first-child {
+    background-color: #28a745; /* Green for Add Task */
+    color: white;
+  }
+  
+  .modal-buttons .button:last-child {
+    background-color: #dc3545; /* Red for Cancel */
+    color: white;
+  }
+  
+  .modal-buttons .button:hover {
+    opacity: 0.9;
+  }
+
+  /* Input field styling */
+.input {
+    width: 80%; /* Full width of the modal */
+    padding: 10px; /* Add padding for better spacing */
+    margin-bottom: 20px; /* Add space below the input field */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1rem; /* Increase font size for readability */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus effects */
+  }
+  
+  /* Input field focus styling */
+  .input:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5); /* Blue glow on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  /* Placeholder text styling */
+  .input::placeholder {
+    color: #aaa; /* Light gray placeholder text */
+    font-style: italic; /* Italicize placeholder text */
+  }
