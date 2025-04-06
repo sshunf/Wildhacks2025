@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     long_term_goals: [String],
     rating: Number,
     finished_survey: Boolean,
-    hero_id: Number
+    hero_id: Number,
 });
 
 const User = mongoose.model('User', userSchema);

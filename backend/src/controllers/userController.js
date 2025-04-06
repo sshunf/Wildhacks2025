@@ -77,4 +77,21 @@ const updateHero = async (req, res) => {
     }
 };
 
-module.exports = { createUser, updateUser, updateHero };
+const getSelectedHero = async (req, res) => {
+    try {
+        const userId = req.params.id; // Extract user ID from the URL
+
+        const user = await Users.findById(userId, 'hero_id');
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ hero_id: user.hero_id });
+    } catch (error) {
+        console.error('Error fetching selected hero:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
+module.exports = { createUser, updateUser, updateHero, getSelectedHero };
