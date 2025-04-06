@@ -5,6 +5,7 @@ import superman from '../assets/superman.png';
 import soldier from '../assets/soldier.png';
 import archer from '../assets/archer.png';
 
+
 function Hero() {
     const navigate = useNavigate();
     const location = useLocation();
