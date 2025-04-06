@@ -69,6 +69,10 @@ function Dashboard() {
           />
         ))}
       </div>
+      <div>
+        <button className="button">Add Task</button>
+        <button className="button">Get Recommended Tasks</button>
+      </div>
     </div>
   );
 }

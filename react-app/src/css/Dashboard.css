@@ -6,7 +6,7 @@
   
   /* Title styling */
   .dashboard-title {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     margin-bottom: 10px;
     color: #333;
@@ -23,5 +23,10 @@
   .tasks-container {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between tasks */
+    gap: 0px; /* Space between tasks */
+  }
+
+  .button {
+    margin-top: 20px;
+    margin-right: 25px;
   }
