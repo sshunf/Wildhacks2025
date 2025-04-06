@@ -16,13 +16,13 @@ function GetStarted() {
             console.log(userData);
 
             
-            const userTasks = await fetch(`http://localhost:5000/task/${userData._id}`, {
+            let userTasks = await fetch(`http://localhost:5000/task/${userData._id}`, {
               method: 'GET',
               headers: { 'Content-Type': 'application/json' }
             });
 
-            console.log("userTasks: ", userTasks);
-            console.log("userTasks: ", userTasks.body);
+            userTasks = await userTasks.json();
+            userTasks = userTasks.tasks || []; // Ensure tasks is an array
 
             if (userTasks.length === 0){
               const data = await fetch('http://localhost:5000/task/process-content', {
