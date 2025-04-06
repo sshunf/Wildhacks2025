@@ -10,8 +10,9 @@ connectDB();
 app.use(express.json());
 
 // Import routes
-const routes = require('./routes');
+const routes = require('./routes/geminiRoutes');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const corsOptions = {
     origin: (origin, callback) => {
@@ -36,6 +37,7 @@ const corsOptions = {
 // Use routes
 app.use('/api', routes);
 app.use('/auth', authRoutes);
+app.use('/api', userRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
