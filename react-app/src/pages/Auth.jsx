@@ -39,8 +39,14 @@ const Auth = () => {
 
                 localStorage.setItem('userId', data.user._id); // Store the user ID
 
-                alert(`Welcome, ${data.user.name}!`);
-                navigate('/survey'); // Redirect to /survey after successful login
+                console.log(data.user.finished_survey);
+                if (data.user.finished_survey) {
+                    alert(`Welcome back, ${data.user.username}!`);
+                    navigate('/getstarted'); // Redirect to GetStarted page if survey is completed
+                } else {
+                    alert(`Welcome, ${data.user.username}!`);
+                    navigate('/survey'); // Redirect to Survey page if survey is not completed
+                }
             })
             .catch((error) => {
                 console.error('Error signing in:', error);

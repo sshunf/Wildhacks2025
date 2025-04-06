@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Survey from './pages/Survey';
 import Auth from './pages/Auth';
+import GetStarted from './pages/GetStarted'
 import './App.css';
 
 function NotFound() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/survey" element={<Survey />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/getstarted" element={<GetStarted />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
